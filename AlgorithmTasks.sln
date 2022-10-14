@@ -3,7 +3,37 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Matrix", "Matrix\Matrix.csproj", "{44C24F18-A64D-46B7-A888-74D188321D49}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recursion", "Recursion\Recursion.csproj", "{7EA9359B-370B-48D0-AC09-A9BF9929DE23}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hash", "Hash\Hash.csproj", "{2F86F0FF-2DC0-4A43-A0C9-7402A1999C08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOP", "OOP\OOP.csproj", "{872BACEA-1A48-441E-BF66-546112A11B26}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{44C24F18-A64D-46B7-A888-74D188321D49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44C24F18-A64D-46B7-A888-74D188321D49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44C24F18-A64D-46B7-A888-74D188321D49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44C24F18-A64D-46B7-A888-74D188321D49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EA9359B-370B-48D0-AC09-A9BF9929DE23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EA9359B-370B-48D0-AC09-A9BF9929DE23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EA9359B-370B-48D0-AC09-A9BF9929DE23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EA9359B-370B-48D0-AC09-A9BF9929DE23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F86F0FF-2DC0-4A43-A0C9-7402A1999C08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F86F0FF-2DC0-4A43-A0C9-7402A1999C08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F86F0FF-2DC0-4A43-A0C9-7402A1999C08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F86F0FF-2DC0-4A43-A0C9-7402A1999C08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{872BACEA-1A48-441E-BF66-546112A11B26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{872BACEA-1A48-441E-BF66-546112A11B26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{872BACEA-1A48-441E-BF66-546112A11B26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{872BACEA-1A48-441E-BF66-546112A11B26}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
