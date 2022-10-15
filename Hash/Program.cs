@@ -42,13 +42,13 @@ namespace Hash
                 {
                     case 1:
                         foreach (var x in directory.Get())
-                            Console.WriteLine($"{x.Name} | {x.Phone} | {x.Hash}");
+                            Console.WriteLine($"{x.Name} | {x.Phone}");
                         break;
                     case 2:
                         Console.WriteLine("Enter a name: ");
                         string search = Console.ReadLine();
                         foreach (var x in directory.GetByName(search))
-                            Console.WriteLine($"{x.Name} | {x.Phone} | {x.Hash}");
+                            Console.WriteLine($"{x.Name} | {x.Phone}");
                         break;
                     case 3:
                         Console.WriteLine("Enter a name: ");
@@ -72,7 +72,7 @@ namespace Hash
                         Console.WriteLine("Enter a name: ");
                         string update = Console.ReadLine();
                         foreach (var x in directory.GetByName(update))
-                            Console.WriteLine($"{x.Name} | {x.Phone} | {x.Hash}");
+                            Console.WriteLine($"{x.Name} | {x.Phone}");
 
                         Console.WriteLine("Enter a new name: ");
                         string updateName = Console.ReadLine();

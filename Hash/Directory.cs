@@ -11,15 +11,13 @@ namespace Hash
         public Directory() =>
             contacts = new List<Contact>();
 
-        public List<Contact> Get()
-        {
-            return contacts.ToList();
-        }
+        public List<Contact> Get() => 
+            contacts.ToList();
+        
 
-        public List<Contact> GetByName(string name)
-        {
-            return contacts.Where(c => c.Hash == Hash.Generate(name)).ToList();
-        }
+        public List<Contact> GetByName(string name) => 
+            contacts.Where(c => c.Name == Hash.Generate(name)).ToList();
+        
 
         public void Add(Contact c)
         {
@@ -29,7 +27,8 @@ namespace Hash
                 return;
             }
                 
-            c.Hash = Hash.Generate(c.Name);
+            c.Name = Hash.Generate(c.Name);
+            c.Phone = Hash.Generate(c.Phone);
             contacts.Add(c);
         }
 
@@ -42,7 +41,7 @@ namespace Hash
                 return;
             }
 
-            contacts.Remove(contacts.FirstOrDefault(n => n.Hash == hash));
+            contacts.Remove(contacts.FirstOrDefault(n => n.Name == hash));
         }
 
         public void Update(string name, Contact c)
@@ -54,13 +53,13 @@ namespace Hash
                 return;
             }
 
-            contacts.Remove(contacts.FirstOrDefault(n => n.Hash == hash));
+            contacts.Remove(contacts.FirstOrDefault(n => n.Name == hash));
             Add(c);
         }
 
         private bool isExists(string hash)
         {
-            if (contacts.Any(n => n.Hash == hash))
+            if (contacts.Any(n => n.Name == hash))
                 return true;
             return false;
         }
