@@ -27,11 +27,10 @@ namespace Recursion
             else return Fiban(n - 1) + Fiban(n - 2);
         }
 
-        static int Pow(int a, int n)
+        static double Pow(int a, int n)
         {
-            if (n < 0) throw new ArgumentException("Incorrect power");
             if (n == 0) return 1;
-            if (n == 1) return a;
+            if (n < 0) return 1d / a * Pow(a, ++n);
             return a * Pow(a, --n);
         }
     }
