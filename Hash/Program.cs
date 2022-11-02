@@ -33,8 +33,9 @@ namespace Hash
                 Console.WriteLine("2: Search by name");
                 Console.WriteLine("3: Add");
                 Console.WriteLine("4: Remove by name");
-                Console.WriteLine("5: Update by name");
-                Console.WriteLine("6: Close");
+                Console.WriteLine("5: Update by name"); 
+                Console.WriteLine("6: Update by name only Phone");
+                Console.WriteLine("7: Close");
 
                 int action = int.Parse(Console.ReadLine());
 
@@ -86,14 +87,23 @@ namespace Hash
                         });
                         break;
                     case 6:
+                        Console.WriteLine("Enter a name: ");
+                        string updatePhoneName = Console.ReadLine();
+                        foreach (var x in directory.GetByName(updatePhoneName))
+                            Console.WriteLine($"{x.Name} | {x.Phone}");
+
+                        Console.WriteLine("Enter a new phone: ");
+                        string updatePhonePhone = Console.ReadLine();
+
+                        directory.UpdatePhone(updatePhoneName, updatePhonePhone);
+                        break;
+                    case 7:
                         isRunning = false;
                         break;
                 }
                 Console.ReadKey();
                 Console.Clear();
             }
-
-            
         }
     }
 }

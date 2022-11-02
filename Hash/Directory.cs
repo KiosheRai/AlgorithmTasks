@@ -6,18 +6,52 @@ namespace Hash
 {
     public class Directory
     {
-        private readonly List<Contact> contacts;
+        private readonly Dictionary<string, List<Contact>> _hashTable;
 
         public Directory() =>
-            contacts = new List<Contact>();
+            _hashTable = new Dictionary<string, List<Contact>>();
 
-        public List<Contact> Get() => 
-            contacts.ToList();
-        
+        private bool isExists(string name)
+        {
+            var hash = Hash.Generate(name);
 
-        public List<Contact> GetByName(string name) => 
-            contacts.Where(c => c.Name == Hash.Generate(name)).ToList();
-        
+            if (!_hashTable.ContainsKey(hash))
+                return false;
+
+            var hashTableItem = _hashTable[hash];
+
+            if (hashTableItem != null)
+            {
+                var item = hashTableItem.SingleOrDefault(i => i.Name == name);
+
+                if (item != null)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public List<Contact> Get()
+        {
+            var list = new List<Contact>();
+
+            foreach(var listContact in _hashTable.Values)
+                foreach(var contact in listContact)
+                    list.Add(contact);
+                
+            return list;
+        }
+
+        public List<Contact> GetByName(string name)
+        {
+            var hash = Hash.Generate(name);
+
+            var hashTableItem = _hashTable[hash];
+
+            return hashTableItem.Where(i => i.Name == name).ToList();
+        }
 
         public void Add(Contact c)
         {
@@ -26,42 +60,74 @@ namespace Hash
                 Console.WriteLine("Wrong data!");
                 return;
             }
-                
-            c.Name = Hash.Generate(c.Name);
-            c.Phone = Hash.Generate(c.Phone);
-            contacts.Add(c);
+
+            //Фио считается уникальным, поэтому его повторение запрещается, иначе в случае одинакового хеша и имени невозможно было бы удалить нужную запись
+            //Для проверки коллизии можно убрать эту проверку и добавить запись с уже существующим фио, но операции кроме просмотра списка будут недоступны с этой записью
+            //Скриншот подтвержающие решении колизии я высылал вместе с проектом
+            if (isExists(c.Name))
+            {
+                Console.WriteLine("The contact already exists");
+                return;
+            }
+
+            var hash = Hash.Generate(c.Name);
+
+            if (_hashTable.ContainsKey(hash))
+            {
+                var list = _hashTable[hash];
+                list.Add(c);
+                return;
+            }
+            
+            _hashTable[hash] = new List<Contact> { c };
         }
 
         public void Remove(string name)
         {
-            string hash = Hash.Generate(name);
-            if (!isExists(hash))
+            if (!isExists(name))
             {
                 Console.WriteLine("Contact not found!");
                 return;
             }
 
-            contacts.Remove(contacts.FirstOrDefault(n => n.Name == hash));
+            var hash = Hash.Generate(name);
+
+            var hashTableItem = _hashTable[hash];
+
+            hashTableItem.Remove(hashTableItem.SingleOrDefault(i => i.Name == name));
         }
 
+        //Полное редактировние при котором запись удаляется и добавляется снова для генерации нового хеша
         public void Update(string name, Contact c)
         {
-            string hash = Hash.Generate(name);
-            if (!isExists(hash))
-            {
-                Console.WriteLine("Contact not found!");
+            if (!isExists(name))
                 return;
-            }
 
-            contacts.Remove(contacts.FirstOrDefault(n => n.Name == hash));
+            Remove(name);
             Add(c);
         }
 
-        private bool isExists(string hash)
+        //Полноценное редактирование при котором изменяется только номер телефона
+        //Хеш и фио остаются нетронутыми
+        public void UpdatePhone(string name, string phone)
         {
-            if (contacts.Any(n => n.Name == hash))
-                return true;
-            return false;
+            if (!isExists(name))
+            {
+                Console.WriteLine("Contact not found!");
+                return;
+            }
+
+            if (!Validator.isPhone(phone))
+            {
+                Console.WriteLine("Wrong phone number");
+                return;
+            }
+
+            var hash = Hash.Generate(name);
+
+            var hashTableItem = _hashTable[hash];
+
+            hashTableItem.SingleOrDefault(i => i.Name == name).Phone = phone;
         }
     }
 }
